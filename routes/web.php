@@ -1,7 +1,11 @@
 <?php
 
+use App\Jobs\ReconcileAccount;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = User::first();
+    dispatch(new ReconcileAccount($user));
+    return 'Finished';
 });
